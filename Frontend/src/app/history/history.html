@@ -1,0 +1,70 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
+    <div class="max-w-7xl mx-auto space-y-6">
+
+        <!-- Header Section -->
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900">Employment History</h2>
+                <p class="text-slate-600 mt-1">View previously deleted or inactive staff records</p>
+            </div>
+            <a routerLink="/"
+                class="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Employee List
+            </a>
+        </div>
+
+        <!-- History Table Card -->
+        <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                            <th class="text-left p-4 font-semibold text-slate-700 text-sm uppercase tracking-wider">Name
+                            </th>
+                            <th class="text-left p-4 font-semibold text-slate-700 text-sm uppercase tracking-wider">
+                                Department</th>
+                            <th class="text-left p-4 font-semibold text-slate-700 text-sm uppercase tracking-wider">Hire
+                                Date</th>
+                            <th class="text-left p-4 font-semibold text-slate-700 text-sm uppercase tracking-wider">
+                                Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr *ngFor="let emp of deletedEmployees" class="hover:bg-slate-50 transition-colors">
+                            <td class="p-4">
+                                <div class="font-medium text-slate-900">{{ emp.fullName }}</div>
+                                <div class="text-sm text-slate-500">ID: #{{ emp.id }}</div>
+                            </td>
+                            <td class="p-4">
+                                <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
+                                    {{ emp.department }}
+                                </span>
+                            </td>
+                            <td class="p-4 text-slate-600">
+                                {{ emp.hireDate | date:'mediumDate' }}
+                            </td>
+                            <td class="p-4">
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-red-50 text-red-700">
+                                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                                    Deleted
+                                </span>
+                            </td>
+                        </tr>
+
+                        <!-- Empty State -->
+                        <tr *ngIf="deletedEmployees.length === 0 && !loading">
+                            <td colspan="4" class="p-12 text-center">
+                                <p class="text-slate-500 font-medium">No history records found.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
